@@ -349,30 +349,60 @@ document.addEventListener("DOMContentLoaded",function(){
     var lanCont = document.getElementsByClassName("lan-cont")[0];
     var couSearch = document.getElementsByClassName("cou-search")[0];
     var lanSearch = document.getElementsByClassName("lan-search")[0];
-
     var progBar = document.getElementsByClassName("prog-bar")[0];
+
     selectCountryLanguage(couList,lanList,couBox,lanBox,couCont,lanCont);
-    drobBoxClick(couList,lanList,couBox,lanBox,couCont,lanCont,couSearch,lanSearch);
+    dropBoxClick(couBox,lanBox,couCont,lanCont,couSearch,lanSearch);
     searchCou(couSearch,couList);
     searchLan(lanSearch,lanList);
-    nextClick(progBar);
+    hideLists(couCont,lanCont);
+    nextClickEvent(progBar);
 });
 
 //Functions
-function drobBoxClick(couList,lanList,couBox,lanBox,couCont,lanCont,couSearch,lanSearch){
+async function dropBoxClick(couBox,lanBox,couCont,lanCont,couSearch,lanSearch){
+    await makeDropBox(couBox, lanBox);
+    
     couBox.addEventListener("click",function(){
         var Coord = couBox.getBoundingClientRect();
         couCont.style.left=Coord.left;
-        couCont.style.top=Coord.top;
+        couCont.style.top=Coord.bottom;
         couCont.style.display="flex";
         couSearch.focus();
     })
     lanBox.addEventListener("click",function(){
         var Coord = lanBox.getBoundingClientRect();
         lanCont.style.left=Coord.left;
-        lanCont.style.top=Coord.top;
+        lanCont.style.top=Coord.bottom;
         lanCont.style.display="flex";
         lanSearch.focus();
+    })
+}
+
+function makeDropBox(couBox, lanBox){
+    return new Promise(resolve=>{
+        var tempC = document.createDocumentFragment();
+        var spC = document.createElement("span");
+        spC.innerHTML="Please select a country";
+        spC.classList.add("inline-msg");
+        var sp1 = document.createElement("span");
+        sp1.innerHTML="#";
+        sp1.classList.add("inline-button");
+        tempC.append(spC);
+        tempC.append(sp1);
+        couBox.append(tempC);
+
+        var tempL = document.createDocumentFragment();
+        var spL = document.createElement("span");
+        spL.innerHTML="Please select a language";
+        spL.classList.add("inline-msg");
+        var sp2 = document.createElement("span");
+        sp2.innerHTML="#";
+        sp2.classList.add("inline-button");
+        tempL.append(spL);
+        tempL.append(sp2);
+        lanBox.append(tempL);
+        resolve();
     })
 }
 
@@ -438,10 +468,10 @@ async function selectCountryLanguage(couList,lanList,couBox,lanBox,couCont,lanCo
     for (var i = 0; i < lists.length; i++) {
         lists[i].addEventListener("click", function () {
             if(this.classList.contains("lan")){
-                lanBox.innerHTML=this.innerHTML;
+                lanBox.children[0].innerHTML=this.innerHTML;
                 lanCont.style.display="none";
             }else if(this.classList.contains("cou")){
-                couBox.innerHTML=this.innerHTML;
+                couBox.children[0].innerHTML=this.innerHTML;
                 couCont.style.display="none";
             }
         });
@@ -452,6 +482,15 @@ function buttonProgress(progBar){
     return new Promise(resolve=>{
         progBar.style.display="flex";
         progBar.style.color="black";
+        var tempP = document.createDocumentFragment();
+        if(progBar.innerHTML==""){
+            for(var i=0;i<3;i++){
+                var p = document.createElement("div");
+                p.innerHTML=".";
+                tempP.append(p);
+            }
+            progBar.append(tempP);
+        }
         resolve(progBar);
     })
 }
@@ -469,16 +508,22 @@ function progressDots(progBar){
         },600);
     });
 }
-async function loadAll(progBar){
+async function nextClicked(progBar){
     await buttonProgress(progBar);
     await progressDots(progBar);
     //document.location.href="lang_region\\lang_region_H.html";
 }
 
-function nextClick(progBar){
+function nextClickEvent(progBar){
     document.getElementsByClassName("button")[0].addEventListener("click",function(){
         this.children[0].innerHTML="";
-        loadAll(progBar);
+        nextClicked(progBar);
     })
 }
 
+function hideLists(couCont,lanCont){
+    document.addEventListener("mouseup",function(){
+        couCont.style.display="none";
+        lanCont.style.display="none";
+    })
+}

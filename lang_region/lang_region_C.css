@@ -38,7 +38,7 @@ body{
 }
 .drop-box{
     width: 20rem;
-    height: 3rem;
+    height: 2.6rem;
     border: 1px solid rgb(220,220,220);
     box-sizing: border-box;
     margin-right: 2rem;
@@ -47,6 +47,7 @@ body{
     font-size: 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 0.5rem;
     overflow: hidden;
 }
@@ -57,9 +58,26 @@ body{
 .drop-box:active{
     background-color: rgb(35,35,35);
 }
+.drop-box-button{
+    display: flex;
+    margin: 0.2rem;
+}
+.inline-button{
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgb(70,70,70);
+    display: flex;
+    align-items: center;
+}
+.inline-msg{
+    max-width: 80%;
+}
 .cou-cont, .lan-cont{
     display: none;
     position: absolute;
+    box-sizing: border-box;
+    width: 20rem;
     max-height: 40%;
     flex-direction: column;
     border: 1px solid rgb(220,220,220);
@@ -67,7 +85,6 @@ body{
 .cou-lis, .lan-lis{
     flex-direction: column;
     background-color: rgb(35,35,35);
-    width: 20rem;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
@@ -75,8 +92,7 @@ body{
 .bar{
     display: flex;
     align-items: center;
-    width: 20rem;
-    height: 3rem;
+    height: 2.6rem;
     box-sizing: border-box;
     padding: 0.5rem;
     color: rgb(220,220,220);
@@ -88,8 +104,7 @@ body{
 }
 .cou-search, .lan-search{
     z-index: 1;
-    min-height: 3rem;
-    width: 20rem;
+    min-height: 2.6rem;
     box-sizing: border-box;
     padding: 0.5rem;
     font-size: 1rem;
@@ -103,8 +118,8 @@ body{
     border-bottom: 1px solid rgb(220,220,220);
 }
 .button{
-    width: 20rem;
-    height: 3rem;
+    width: 10rem;
+    height: 2.6rem;
     display: flex;
     justify-content: center;
     align-items: center;
