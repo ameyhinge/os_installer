@@ -511,7 +511,7 @@ function progressDots(progBar){
 async function nextClicked(progBar){
     await buttonProgress(progBar);
     await progressDots(progBar);
-    //document.location.href="lang_region\\lang_region_H.html";
+    document.location.href="..\\install_location\\install_location_H.html";
 }
 
 function nextClickEvent(progBar){
