@@ -4,7 +4,7 @@ var selectionHeaderData=[
     "Total Space",
     "Free Space"
 ];
-var selectionBoxData=[
+var selectionContData=[
     { partition:"Local Disk C",
     type:"NTFS",
     total_space:"146.50 GB",
@@ -23,7 +23,7 @@ var selectionBoxData=[
     free_space:"62.32 GB" },
 ];
 
-var selectionBoxDimensions=[
+var selectionContDimensions=[
     "8rem",
     "6rem",
     "8rem",
@@ -31,27 +31,29 @@ var selectionBoxDimensions=[
 ]
 
 document.addEventListener("DOMContentLoaded",function(){
-    var selectionBox = document.getElementsByClassName("selection-box")[0];
+    var selectionCont = document.getElementsByClassName("selection-cont")[0];
     var selectionHeader = document.getElementsByClassName("selection-header")[0];
 
     backClick();
-    createSelectionArea(selectionBox, selectionHeader, selectionHeader);
+    createSelectionArea(selectionCont, selectionHeader);
 })
 
 function createSelectionHeader(selectionHeader){
     return new Promise(resolve=>{
         var list = document.createElement("div");
-        list.classList.add("list");
+        list.classList.add("list-title");
         for(var i=0;i<selectionHeaderData.length+1;i++){
             var tempS = document.createElement("span");
             if(i==0){
                 tempS.classList.add("bar");
+                tempS.classList.add("bar-title");
                 tempS.classList.add("inline-button");
             }else{
                 tempS.innerHTML=selectionHeaderData[i-1];
                 tempS.classList.add("bar");
                 tempS.classList.add("bar-sel");
-                tempS.style.width=selectionBoxDimensions[i-1];
+                tempS.classList.add("bar-title");
+                tempS.style.width=selectionContDimensions[i-1];
             }
             list.append(tempS);
         }
@@ -59,9 +61,9 @@ function createSelectionHeader(selectionHeader){
         resolve();
     })
 }
-function createSelectionBox(selectionBox){
+function createselectionCont(selectionCont){
     return new Promise(resolve=>{
-        for(var i=0;i<selectionBoxData.length;i++){
+        for(var i=0;i<selectionContData.length;i++){
             var list = document.createElement("div");
             list.classList.add("list");
             //Append inline button
@@ -71,31 +73,31 @@ function createSelectionBox(selectionBox){
             list.append(tempS);
             //Append all other
             var j=0;
-            for(var key in selectionBoxData[i]){
+            for(var key in selectionContData[i]){
                 var tempP = document.createElement("span");
-                tempP.innerHTML=selectionBoxData[i][key];
+                tempP.innerHTML=selectionContData[i][key];
                 tempP.classList.add("bar");
                 tempP.classList.add("bar-sel");
-                tempP.style.width=selectionBoxDimensions[j];
+                tempP.style.width=selectionContDimensions[j];
                 list.append(tempP);
                 j++;
             }
-            selectionBox.append(list);
+            selectionCont.append(list);
         }
         resolve();
     })
 }
 
-function selectionScroll(selectionBox, selectionHeader){
-    selectionBox.addEventListener("scroll",function(){
-        var left=selectionBox.scrollLeft;
+function selectionScroll(selectionCont, selectionHeader){
+    selectionCont.addEventListener("scroll",function(){
+        var left=selectionCont.scrollLeft;
         selectionHeader.scrollLeft=left;
     })
 }
 
-async function createSelectionArea(selectionBox, selectionHeader, selectionHeader){
-    await Promise.all([createSelectionHeader(selectionHeader),createSelectionBox(selectionBox,selectionBoxData)]);
-    selectionScroll(selectionBox, selectionHeader);
+async function createSelectionArea(selectionCont, selectionHeader){
+    await Promise.all([createSelectionHeader(selectionHeader),createselectionCont(selectionCont,selectionContData)]);
+    selectionScroll(selectionCont, selectionHeader);
 }
 
 function backClick(){

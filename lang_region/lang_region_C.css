@@ -27,7 +27,6 @@
 }
 .cou-search,.lan-search:focus{
     outline: none;
-    border-bottom: 1px solid rgb(220,220,220);
 }
 .hide{
     display: none;

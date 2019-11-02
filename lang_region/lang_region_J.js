@@ -522,8 +522,10 @@ function nextClickEvent(progBar){
 }
 
 function hideLists(couCont,lanCont){
-    document.addEventListener("mouseup",function(){
-        couCont.style.display="none";
-        lanCont.style.display="none";
+    document.addEventListener("mouseup",function(e){
+        if(!e.target.classList.contains("lan-lis") && !e.target.classList.contains("cou-lis") && !e.target.classList.contains("lan-search") && !e.target.classList.contains("cou-search")){
+            couCont.style.display="none";
+            lanCont.style.display="none";
+        }
     })
 }
