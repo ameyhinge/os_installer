@@ -6,7 +6,7 @@ var selectionHeaderData=[
 ];
 var selectionContData=[
     { partition:"Local Disk C",
-    type:"NTFS",
+    type:"System",
     total_space:"146.50 GB",
     free_space:"62.32 GB" },
     { partition:"Local Disk C",
@@ -14,7 +14,7 @@ var selectionContData=[
     total_space:"146.50 GB",
     free_space:"62.32 GB" },
     { partition:"Local Disk C",
-    type:"NTFS",
+    type:"Raw",
     total_space:"146.50 GB",
     free_space:"62.32 GB" },
     { partition:"Local Disk C",
@@ -28,7 +28,13 @@ var selectionContDimensions=[
     "6rem",
     "8rem",
     "8rem"
-]
+];
+
+var menuOptions=[
+    {formattedDisk:"Install, Delete Partition, Merge Partition"},
+    {system:"Upgrade, Format, Delete Partition, Merge Partition"},
+    {rawPartition:"Format"}
+];
 
 document.addEventListener("DOMContentLoaded",function(){
     var selectionCont = document.getElementsByClassName("selection-cont")[0];
@@ -66,6 +72,7 @@ function createselectionCont(selectionCont){
         for(var i=0;i<selectionContData.length;i++){
             var list = document.createElement("div");
             list.classList.add("list");
+            list.classList.add("disk");
             //Append inline button
             var tempS = document.createElement("span");
             tempS.classList.add("bar");
@@ -95,9 +102,19 @@ function selectionScroll(selectionCont, selectionHeader){
     })
 }
 
+function diskSelected(){
+    var diskList = document.getElementsByClassName("disk");
+    for(var d=0;d<diskList.length;d++){
+        diskList[d].addEventListener("click",function(){
+            alert(this.children[2].innerHTML);
+        })
+    }
+}
+
 async function createSelectionArea(selectionCont, selectionHeader){
     await Promise.all([createSelectionHeader(selectionHeader),createselectionCont(selectionCont,selectionContData)]);
     selectionScroll(selectionCont, selectionHeader);
+    diskSelected();
 }
 
 function backClick(){

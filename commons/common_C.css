@@ -1,5 +1,4 @@
 body{
-    background: black;
     font-family: sans-serif;
     margin: 0;
 }
@@ -20,14 +19,12 @@ body{
     padding-top: 2rem;
     padding-bottom: 2rem;
     font-size: 1.6rem;
-    color: rgb(210,210,210);
     overflow-y: auto;
 }
 .header, .footer{
     display: flex;
     align-items: center;
     width: 100%;
-    color: white;
     font-size: 2rem;
     box-sizing: border-box;
     padding: 2rem;
@@ -50,7 +47,7 @@ body{
     overflow-y: auto;
     overflow-x: hidden;
 }
-.drop-box, .selection-cont, .selection-header{
+.drop-box, .selection-norm, .selection-cont, .selection-header{
     width: 20rem;
     height: 2.6rem;
     border: 1px solid transparent;
@@ -66,7 +63,6 @@ body{
     overflow: hidden;
 }
 .drop-box:hover{
-    color: white;
     border-color: white;
 }
 .drop-box-button{
@@ -93,6 +89,10 @@ body{
     margin-top: 1rem;
     border-bottom: none;
 }
+.selection-norm{
+
+}
+
 .button{
     width: 10rem;
     height: 2.6rem;

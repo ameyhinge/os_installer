@@ -1,5 +1,5 @@
 localStorage["theme"]="dark";
-localStorage["accent"]="rgb(10,0,255)";
+localStorage["accent"]="rgb(0,0,0)";
 
 var light15 = "rgba(255,255,255,0.15)";
 var light30 = "rgba(255,255,255,0.30)";
@@ -16,6 +16,15 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 
 function styleControls(){
+
+    if(localStorage["theme"]=="dark"){
+        document.body.style.backgroundColor="black";
+        document.body.style.color="white";
+    }else{
+        document.body.style.backgroundColor="white";
+        document.body.style.color="black";
+    }
+
     var buttons = document.getElementsByClassName("button");
     for(var i=0;i<buttons.length;i++){
         addMouseEvents(buttons[i], "true");
@@ -40,15 +49,15 @@ function addMouseEvents(control, isAccent){
     control.addEventListener("mouseenter",function(){
         if(localStorage["theme"]=="dark"){
             if(isAccent=="true"){
-                this.style.background="linear-gradient(to right,"+light30+","+light30+"),linear-gradient(to right,"+localStorage["accent"]+","+localStorage["accent"]+")";
+                this.style.background="linear-gradient(0deg,"+light30+","+light30+"),linear-gradient(0deg,"+localStorage["accent"]+","+localStorage["accent"]+")";
             }else{
-                this.style.background="linear-gradient(to right,"+light30+","+light30+"),linear-gradient(to right,black,black)";
+                this.style.background="linear-gradient(0deg,"+light30+","+light30+"),linear-gradient(0deg,black,black)";
             }
         }else{
             if(isAccent=="true"){
-                this.style.background="linear-gradient(to right,"+dark30+","+dark30+"),linear-gradient(to right,"+localStorage["accent"]+","+localStorage["accent"]+")";
+                this.style.background="linear-gradient(0deg,"+dark30+","+dark30+"),linear-gradient(0deg,"+localStorage["accent"]+","+localStorage["accent"]+")";
             }else{
-                this.style.background="linear-gradient(to right,"+dark30+","+dark30+"),linear-gradient(to right,white,white)";
+                this.style.background="linear-gradient(0deg,"+dark30+","+dark30+"),linear-gradient(0deg,white,white)";
             }
         }
     }) 
@@ -60,15 +69,15 @@ function addMouseEvents(control, isAccent){
         if(localStorage["theme"]=="dark"){
             this.style.color="black";
             if(isAccent=="true"){
-                this.style.background="linear-gradient(to right,"+light90+","+light90+"),linear-gradient(to right,"+localStorage["accent"]+","+localStorage["accent"]+")";
+                this.style.background="linear-gradient(0deg,"+light90+","+light90+"),linear-gradient(0deg,"+localStorage["accent"]+","+localStorage["accent"]+")";
             }else{
-                this.style.background="linear-gradient(to right,"+light90+","+light90+"),linear-gradient(to right,black,black)";
+                this.style.background="linear-gradient(0deg,"+light90+","+light90+"),linear-gradient(0deg,black,black)";
             }
         }else{
             if(isAccent=="true"){
-                this.style.background="linear-gradient(to right,"+dark90+","+dark90+"),linear-gradient(to right,"+localStorage["accent"]+","+localStorage["accent"]+")";
+                this.style.background="linear-gradient(0deg,"+dark90+","+dark90+"),linear-gradient(0deg,"+localStorage["accent"]+","+localStorage["accent"]+")";
             }else{
-                this.style.background="linear-gradient(to right,"+dark90+","+dark90+"),linear-gradient(to right,white,white)";
+                this.style.background="linear-gradient(0deg,"+dark90+","+dark90+"),linear-gradient(0deg,white,white)";
             }
         }
     })
@@ -81,11 +90,11 @@ function styleContainers(container){
     container.style.borderColor=midColor;
 
     if(localStorage["theme"]=="dark"){
-        container.style.background="linear-gradient(to right,"+light15+","+light15+"),linear-gradient(to right,black,black)";
+        container.style.background="linear-gradient(0deg,"+light15+","+light15+"),linear-gradient(0deg,black,black)";
         container.style.color="white";
         container.style.boxShadow="1px 1px 10px 0px rgba(255,255,255,0.3)";
     }else{
-        container.style.background="linear-gradient(to right,"+dark15+","+dark15+"),linear-gradient(to right,white,white)";
+        container.style.background="linear-gradient(0deg,"+dark15+","+dark15+"),linear-gradient(0deg,white,white)";
         container.style.color="black";
         container.style.boxShadow="1px 1px 10px 0px rgba(0,0,0,0.3)";
     }
@@ -106,12 +115,12 @@ function controllerNormalStyle(control, isAccent){
         if(localStorage["theme"]=="dark"){
             control.style.color="white";
             control.style.boxShadow="1px 1px 10px 0px rgba(255,255,255,0.3)";
-            control.style.background="linear-gradient(to right,"+light15+","+light15+"),linear-gradient(to right,black,black)";
+            control.style.background="linear-gradient(0deg,"+light15+","+light15+"),linear-gradient(0deg,black,black)";
         }else{
             control.style.backgroundColor="white";
             control.style.color="black";
             control.style.boxShadow="1px 1px 10px 0px rgba(0,0,0,0.3)";
-            control.style.background="linear-gradient(to right,"+dark15+","+dark15+"),linear-gradient(to right,white,white)";
+            control.style.background="linear-gradient(0deg,"+dark15+","+dark15+"),linear-gradient(0deg,white,white)";
         }
     }
 }
